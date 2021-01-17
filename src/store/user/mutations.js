@@ -21,3 +21,12 @@ export const setGeoLocation = (state, payload) => {
 export const setInstitution = (state, payload) => {
     state.institution = payload
 };
+
+export const setListStudent = (state, payload) => {
+  state.listStudent = payload
+};
+
+export const setDialogStudent = (state, payload) => {
+  state.dialogStudent = payload
+};
+

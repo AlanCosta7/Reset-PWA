@@ -11,13 +11,13 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title>
+        <q-toolbar-title @click="onIndex">
           Reset
         </q-toolbar-title>
         <q-btn color="grey-2" round @click="onProfile" >
           <q-avatar size="40px">
             <q-img
-              v-if="currentUser.avatar"
+              v-if="currentUser && currentUser.avatar"
               :src="currentUser.photoUrl"
               width="40px"
               spinner-color="primary"
@@ -55,6 +55,7 @@
 
 <script>
 import Vuex from "vuex";
+import { LocalStorage } from 'quasar'
 
 export default {
   name: 'MainLayout',
@@ -62,6 +63,12 @@ export default {
     return {
       leftDrawerOpen: false,
     }
+  },
+  mounted() {
+
+    var user = LocalStorage.getItem('user')
+   // console.log(user)
+    this.$store.commit('setCurrentUser', user)
   },
   computed: {
     ...Vuex.mapGetters({
@@ -72,8 +79,17 @@ export default {
   },
   methods: {
     onProfile() {
+      var id = this.currentUser._id
       this.$router.push({
-        name: "profile"
+        name: "profile",
+        params: { id: id }
+      });
+    },
+    onIndex() {
+      var id = this.currentUser._id
+      this.$router.push({
+        name: "index",
+        params: { id: id }
       });
     },
     logout() {

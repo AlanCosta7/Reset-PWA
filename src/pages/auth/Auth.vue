@@ -372,6 +372,7 @@ export default {
     onSubmit() {
       var cpf = this.cpf;
       var password = this.password;
+
       var value = {
         path: this.tab,
         cpf: cpf,
@@ -411,8 +412,10 @@ export default {
       Loading.show();
       if (currentUser) {
         setTimeout(() => {
+          var id = this.currentUser._id
           this.$router.push({
-            name: "index"
+            name: "index",
+            params: { id: id }
           });
 
           Loading.hide();

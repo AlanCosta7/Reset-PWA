@@ -6,10 +6,6 @@ export function signInWithCpfAndPassword ({ commit, state }, payload) {
     var path
     var mentor = "https://reset-back-end.herokuapp.com/login/mentor"
     var student = "https://reset-back-end.herokuapp.com/login/student"
-    var data = {
-        cpf: payload.cpf,
-        password: payload.password,
-    }
 
     if(payload.path === 'student') {
       path = student
@@ -19,8 +15,18 @@ export function signInWithCpfAndPassword ({ commit, state }, payload) {
       return
     }
 
-    return axios.get(path, data).then(function (response) {
+    return axios({
+      url: path,
+      method: 'POST',
+      data: {
+        cpf: payload.cpf,
+        password: payload.password
+      },
+      contentType: "application/json",
+      dataType: "json",
+    }).then(function (response) {
 
+      console.log('signInWithCpfAndPassword', response)
       if (response.status == "200") {
         response.data.type = payload.path
         commit('setCurrentUser', response.data)
@@ -50,7 +56,6 @@ export function createUserWithCpfAndPassword ({ commit, state }, payload) {
   return axios.post(path, data).then(function (response) {
 
     if (response.status == "200") {
-      response.data.type = payload.path
       commit('setCurrentUser', response.data)
       console.log('signInWithCpfAndPassword', response)
     }
@@ -64,31 +69,11 @@ export function saveProfile ({ commit, state }, payload) {
   var path
   var student = "https://reset-back-end.herokuapp.com/student"
   var mentor = "https://reset-back-end.herokuapp.com/mentor"
-  var data
 
   if(payload.type === 'student') {
     path = student
-    data = {
-      name: payload.name,
-      birth: payload.birth,
-      institution: payload.institution,
-      skills: payload.skills,
-      avatar: payload.avatar,
-      schooling: payload.schooling,
-      email: payload.email,
-      codedPassword: payload.codedPassword
-    }
-
   } else if (payload.type === 'mentor') {
     path = mentor
-    data = {
-      name: payload.name,
-      birth: payload.birth,
-      address: payload.address,
-      skills: payload.skills,
-      schooling: payload.schooling,
-      profession: payload.profession
-    }
   } else {
     return
   }
@@ -96,7 +81,7 @@ export function saveProfile ({ commit, state }, payload) {
   return axios({
     method: 'PUT',
     url: path,
-    data: data,
+    data: state.currentUser,
     headers: {
       "Content-Type": "application/json",
       token: token
@@ -105,8 +90,7 @@ export function saveProfile ({ commit, state }, payload) {
 
     console.log('saveProfile', response)
     if (response.status == "200") {
-      response.data.type = payload.path
-      commit('setCurrentUser', response.data)
+     // commit('setCurrentUser', response.data)
      // console.log('saveProfile', response)
     }
   })
@@ -143,11 +127,35 @@ export function getListStudent ({ commit, state }, payload) {
   var token = state.currentUser.token
 
 
-  return axios.post(path, token).then(function (response) {
+  return axios({
+    method: 'GET',
+    url: path,
+    headers: {
+      "Content-Type": "application/json",
+      token: token
+    }
+  }).then(function (response) {
 
     if (response.status == "200") {
-      commit('setCurrentUser', response.data)
-      console.log('signInWithCpfAndPassword', response)
+      commit('setListStudent', response.data)
+      console.log('signInWithCpfAndPassword', response.data)
+    }
+  })
+}
+
+
+export function getInstituicao ({ commit, state }, payload) {
+  // axios
+  var path = `https://reset-back-end.herokuapp.com/institution/${payload}`
+
+  return axios({
+    method: 'GET',
+    url: path
+  }).then(function (response) {
+
+    if (response.status == "200") {
+      return response.data
+      //console.log('setInstituicao', response.data)
     }
   })
 }

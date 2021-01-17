@@ -38,6 +38,7 @@ export default function () {
     },
     err: null,
     geoLocation: null,
-    listStudent: []
+    listStudent: [],
+    dialogStudent: null
   }
 }

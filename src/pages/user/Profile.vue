@@ -75,10 +75,10 @@
           <!-- <q-btn color="primary" icon="room" outline label="Localização" @click="onDialogMapa" /> -->
         </div>
         <div class="text-subtitle2">
-          <q-select outlined v-model="currentUser.skills" :options="options" label="Interesses" />
+          <q-select outlined v-model="currentUser.skills" multiple :options="optionsSkills" label="Interesses" />
         </div>
         <div class="text-subtitle2">
-          <q-input outlined v-model="currentUser.schooling" type="text" label="Escolaridade" />
+          <q-select outlined v-model="currentUser.schooling" :options="optionsSchooling" label="Escolaridade" />
         </div>
         <div v-if="currentUser.type === 'student'" class="text-subtitle2">
           <q-input outlined v-model="currentUser.institution" type="text" label="Instituição" />
@@ -98,6 +98,8 @@
 <script>
 import Vuex from "vuex";
 import { Notify } from "quasar";
+import { LocalStorage } from 'quasar'
+
 // import Maps from "../maps/Maps";
 
 export default {
@@ -105,12 +107,16 @@ export default {
     return {
       dialogMapa: false,
       eventSize: false,
-      options: [],
+      optionsSkills: ['Programação', 'Design', 'Sucesso do cliente', 'Marketing Digital'],
+      optionsSchooling: ['Ensino Fundamental incompleto', 'Ensino Fundamental completo', 'Ensino Médio incompleto', 'Ensino Médio completo', 'Ensino Superior incompleto', 'Ensino Superior completo', 'Mestrado Completo', 'Mestrado incompleto', 'Doutorado incompleto', 'Doutorado completo']
     };
   },
   // components: {
   //   Maps
   // },
+  mounted() {
+
+  },
   computed: {
     ...Vuex.mapGetters({
       currentUser: "currentUser",
@@ -123,9 +129,12 @@ export default {
       var dialogMapa = this.dialogMapa
     },
     onIndex() {
+      var id = this.currentUser._id
       this.$router.push({
         name: "index",
+        params: { id: id }
       });
+
     },
     saveProfile() {
       var currentUser = this.currentUser;
