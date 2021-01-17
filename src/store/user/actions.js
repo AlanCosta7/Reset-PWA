@@ -170,3 +170,29 @@ export function getInstituicao ({ commit, state }, payload) {
     }
   })
 }
+
+export function setMentoriar ({ commit, state }, payload) {
+  // axios
+  var path = "https://reset-back-end.herokuapp.com/mentor/students"
+  var token = state.currentUser.token
+
+  var data = {
+    student: payload
+  }
+
+  return axios({
+    method: 'POST',
+    url: path,
+    data: data,
+    headers: {
+      "Content-Type": "application/json",
+      token: token
+    }
+  }).then(function (response) {
+
+    if (response.status == "200") {
+      return response.data
+      //console.log('setInstituicao', response.data)
+    }
+  })
+}

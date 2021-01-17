@@ -96,7 +96,7 @@ export default {
       this.$store.dispatch('logout').then( result => {
         if (result) {
           this.$router.push({
-            name: "login"
+            name: "auth"
           });
 
         }

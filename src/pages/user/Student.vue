@@ -25,7 +25,7 @@
       </q-card-section>
       <q-card-actions align="right">
         <q-btn flat label="Cancelar" color="primary" @click="cancelar" />
-        <q-btn flat label="Mentoriar" color="primary" @click="cancelar" />
+        <q-btn flat label="Mentoriar" color="primary" @click="mentoriar" />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -69,6 +69,10 @@ export default {
   methods: {
     cancelar() {
       this.$store.commit('setDialogStudent', false)
+    },
+    mentoriar() {
+      var id = this.currentUser._id
+      this.$store.dispatch('setMentoriar', id)
     }
   },
 }
