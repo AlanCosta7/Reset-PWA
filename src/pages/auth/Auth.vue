@@ -428,9 +428,7 @@ export default {
         };
         this.$store
           .dispatch("createUserWithCpfAndPassword", value)
-          .then((result) => {
-            console.log(result);
-          });
+
       }
     },
     handleResetPassword() {

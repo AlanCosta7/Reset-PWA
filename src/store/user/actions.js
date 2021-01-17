@@ -63,7 +63,8 @@ export function createUserWithCpfAndPassword ({ commit, state }, payload) {
     }
   }).then(function (response) {
 
-    if (response.status == "200") {
+    console.log('signInWithCpfAndPassword', response)
+    if (response.status == "201") {
       commit('setCurrentUser', response.data)
       console.log('signInWithCpfAndPassword', response)
       return response.data
