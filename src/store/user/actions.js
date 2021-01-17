@@ -26,11 +26,12 @@ export function signInWithCpfAndPassword ({ commit, state }, payload) {
       dataType: "json",
     }).then(function (response) {
 
-      console.log('signInWithCpfAndPassword', response)
+     // console.log('signInWithCpfAndPassword', response)
       if (response.status == "200") {
         response.data.type = payload.path
         commit('setCurrentUser', response.data)
         console.log('signInWithCpfAndPassword', response)
+        return response.data
       }
     })
 
@@ -53,11 +54,20 @@ export function createUserWithCpfAndPassword ({ commit, state }, payload) {
     return
   }
 
-  return axios.post(path, data).then(function (response) {
+  return axios({
+    method: 'POST',
+    url: path,
+    data: data,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }).then(function (response) {
 
     if (response.status == "200") {
       commit('setCurrentUser', response.data)
       console.log('signInWithCpfAndPassword', response)
+      return response.data
+
     }
   })
 
