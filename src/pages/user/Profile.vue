@@ -25,6 +25,12 @@
           />
         </q-avatar>
       </q-btn>
+      <div v-if="currentUser.type === 'mentor' " class="text-bold q-ma-md">
+        Mentor
+      </div>
+      <div v-if="currentUser.type === 'student' " class="text-bold q-ma-md">
+        Estudante
+      </div>
       <q-card-section class="q-gutter-md">
         <div>
           <q-input outlined v-model="currentUser.name" type="text" label="Nome" />
@@ -46,7 +52,7 @@
           />
         </div>
         <div class="text-subtitle2">
-          <q-input filled v-model="currentUser.birth" >
+          <q-input outlined label="Data de Nascimento" v-model="currentUser.birth" >
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -60,34 +66,51 @@
             </template>
           </q-input>
         </div>
+        <div v-if="currentUser.type === 'mentor'" class="text-subtitle2 borda q-pa-md text-left q-gutter-md">
+          Endereço:
+          <q-input outlined v-model="currentUser.address.street" type="text" label="Rua" />
+          <q-input outlined v-model="currentUser.address.number" type="number" label="Número" />
+          <q-input outlined v-model="currentUser.address.city" type="text" label="Cidade" />
+          <q-input outlined v-model="currentUser.address.state" type="text" label="Estado" />
+          <!-- <q-btn color="primary" icon="room" outline label="Localização" @click="onDialogMapa" /> -->
+        </div>
         <div class="text-subtitle2">
           <q-select outlined v-model="currentUser.skills" :options="options" label="Interesses" />
         </div>
         <div class="text-subtitle2">
           <q-input outlined v-model="currentUser.schooling" type="text" label="Escolaridade" />
         </div>
-        <div class="text-subtitle2">
+        <div v-if="currentUser.type === 'student'" class="text-subtitle2">
           <q-input outlined v-model="currentUser.institution" type="text" label="Instituição" />
+        </div>
+        <div v-if="currentUser.type === 'mentor'" class="text-subtitle2">
+          <q-input outlined v-model="currentUser.profession" type="text" label="Profissão" />
         </div>
       </q-card-section>
       <q-card-actions vertical align="center">
-        <q-btn flat label="Salvar" @click="saveProfile" />
+        <q-btn class="full-width" flat label="Salvar" @click="saveProfile" />
       </q-card-actions>
     </q-card>
+    <!-- <Maps v-if="dialogMapa"></Maps> -->
   </q-layout>
 </template>
 
 <script>
 import Vuex from "vuex";
 import { Notify } from "quasar";
+// import Maps from "../maps/Maps";
 
 export default {
   data() {
     return {
+      dialogMapa: false,
       eventSize: false,
       options: [],
     };
   },
+  // components: {
+  //   Maps
+  // },
   computed: {
     ...Vuex.mapGetters({
       currentUser: "currentUser",
@@ -96,6 +119,9 @@ export default {
     }),
   },
   methods: {
+    onDialogMapa() {
+      var dialogMapa = this.dialogMapa
+    },
     onIndex() {
       this.$router.push({
         name: "index",
@@ -105,7 +131,7 @@ export default {
       var currentUser = this.currentUser;
 
       this.$store.dispatch("saveProfile", currentUser).then((result) => {
-        console.log("resultado", result);
+        //console.log("resultado", result);
         this.onIndex();
       });
     },
