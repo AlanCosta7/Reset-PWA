@@ -40,7 +40,10 @@
       <q-list>
         <q-item @click="logout" clickable>
           <q-item-section>
+            <div class="row items-center">
+            <q-icon name="close" class="q-mx-md" />
             Sair
+            </div>
           </q-item-section>
 
         </q-item>

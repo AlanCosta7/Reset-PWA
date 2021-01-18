@@ -107,7 +107,7 @@ export default {
     return {
       dialogMapa: false,
       eventSize: false,
-      optionsSkills: ['Programação', 'Design', 'Sucesso do cliente', 'Marketing Digital'],
+      optionsSkills: ['empreendedorismo', 'design', 'venda', 'programação', 'marketing digital'],
       optionsSchooling: ['Ensino Fundamental incompleto', 'Ensino Fundamental completo', 'Ensino Médio incompleto', 'Ensino Médio completo', 'Ensino Superior incompleto', 'Ensino Superior completo', 'Mestrado Completo', 'Mestrado incompleto', 'Doutorado incompleto', 'Doutorado completo']
     };
   },
