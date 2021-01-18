@@ -1,22 +1,15 @@
-# Reset App (reset)
 
-inclusão social
+[![alt text](https://reset-back-end.herokuapp.com/images/reset-celular-com-logo.jpeg)]()
 
-## Install the dependencies
-```bash
-yarn
-```
+# PLATAFORMA RESET
+Esse é o repositório da nossa plataforma de cadastramente de jovens (menores) em vunerabilidade social e mentores interessados em fazer a diferença em suas vidas.
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+A ferramenta foi projeta com o intuito de fazer a conexão dos jovens com pessoas dispotas a mentorá-las, por meio de perfil educacional mapeado e trilha de aprendizagem para orientar o mentor, a utilizar as estratégias adequadas a cada perfil de jovem.
 
+A plataforma irá fornecer subsidios para que os mentores possam atuar e as instituições de acolhimento, farão o papel de mediadora das informações entre eles.
 
-### Build the app for production
-```bash
-quasar build
-```
+[![alt text](https://reset-back-end.herokuapp.com/images/github2.jpeg)]()
 
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+Assista o nosso video de apresentação da ferrementa em https://youtu.be/N3_q8HTP_k0
+
+#sejaummentor
