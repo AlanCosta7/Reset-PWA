@@ -100,10 +100,8 @@ export function saveProfile ({ commit, state }, payload) {
   }).then(function (response) {
 
     console.log('saveProfile', response)
-    if (response.status == "200") {
-     // commit('setCurrentUser', response.data)
-     // console.log('saveProfile', response)
-    }
+    return response
+
   })
 
 }
@@ -193,6 +191,23 @@ export function setMentoriar ({ commit, state }, payload) {
     if (response.status == "200") {
       return response.data
       //console.log('setInstituicao', response.data)
+    }
+  })
+}
+
+
+export function getTrilha ({ commit, state }, payload) {
+  // axios
+  var path = "https://reset-back-end.herokuapp.com/journey/6004b9c348f54e0004b1d8a3"
+
+  return axios({
+    method: 'GET',
+    url: path,
+  }).then(function (response) {
+
+    if (response.status == "200") {
+      commit('setTrilha', response.data)
+      console.log('setTrilha', response)
     }
   })
 }

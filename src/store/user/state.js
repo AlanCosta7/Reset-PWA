@@ -39,6 +39,7 @@ export default function () {
     err: null,
     geoLocation: null,
     listStudent: [],
-    dialogStudent: null
+    dialogStudent: null,
+    trilha: null
   }
 }

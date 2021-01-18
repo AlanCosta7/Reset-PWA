@@ -86,11 +86,21 @@ export default {
       });
     },
     onIndex() {
+      var type = this.currentUser.type
       var id = this.currentUser._id
-      this.$router.push({
-        name: "index",
-        params: { id: id }
-      });
+      if(type === 'mentor') {
+        this.$router.push({
+          name: "index",
+          params: { id: id }
+        });
+      } else {
+        this.$router.push({
+          name: "journey",
+          params: { id: id }
+        });
+
+
+      }
     },
     logout() {
       this.$store.dispatch('logout').then( result => {

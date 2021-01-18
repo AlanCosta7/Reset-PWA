@@ -1,5 +1,5 @@
 <template>
-  <q-page class=" bg-grey-2">
+  <q-page class=" bg-grey-2" v-if="currentUser.type === 'mentor'">
     <div class="text-h6 q-pa-md">Lista de estudantes</div>
     <q-list bordered v-for="(item, index) in listStudent" :key="index">
       <q-item v-if="item" clickable v-ripple @click="setStudent">

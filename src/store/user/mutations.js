@@ -30,3 +30,6 @@ export const setDialogStudent = (state, payload) => {
   state.dialogStudent = payload
 };
 
+export const setTrilha = (state, payload) => {
+  state.trilha = payload
+};

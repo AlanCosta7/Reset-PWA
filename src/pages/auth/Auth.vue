@@ -439,7 +439,7 @@ export default {
       console.log("redirectToApp");
 
       Loading.show();
-      if (currentUser) {
+      if (currentUser.type === 'mentor') {
         setTimeout(() => {
           var id = this.currentUser._id;
           this.$router.push({
@@ -450,7 +450,15 @@ export default {
           Loading.hide();
         }, redirectDelay);
       } else {
-        Loading.hide();
+        setTimeout(() => {
+          var id = this.currentUser._id;
+          this.$router.push({
+            name: "journey",
+            params: { id: id },
+          });
+
+          Loading.hide();
+        }, redirectDelay);
       }
     },
   },

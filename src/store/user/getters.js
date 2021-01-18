@@ -10,3 +10,4 @@ export const getLetterUser = state => {
 export const geoLocation = (state) => state.geoLocation
 export const institution = (state) => state.institution
 export const dialogStudent = (state) => state.dialogStudent
+export const trilha = (state) => state.trilha
