@@ -1,6 +1,6 @@
 <template>
-  <q-layout>
-    <q-card flat class="text-center q-pa-md">
+  <q-layout class="row justify-center">
+    <q-card flat class="text-center q-pa-md" style="max-width: 700px; width:100vw">
       <q-btn color="primary" round>
         <q-avatar size="100px">
           <img
@@ -88,7 +88,7 @@
         </div>
       </q-card-section>
       <q-card-actions vertical align="center">
-        <q-btn class="full-width" flat label="Salvar" @click="saveProfile" />
+        <q-btn class="full-width" color="primary" label="Salvar" @click="saveProfile" />
       </q-card-actions>
     </q-card>
     <!-- <Maps v-if="dialogMapa"></Maps> -->

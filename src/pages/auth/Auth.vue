@@ -1,12 +1,12 @@
 <template>
-  <q-page class="bg-grey-2">
-    <q-card flat class="bg-grey-2" style="width: 100%; min-height: 500px">
+  <q-page class="bg-grey-2 row justify-center">
+    <q-card flat class="bg-grey-2" style="max-width: 400px; width:100vw">
       <div
         class="full-width row wrap justify-center items-start content-start q-py-xl"
       >
         <q-img
           src="../../assets/logo.svg"
-          width="50vw"
+          width="150px"
           spinner-color="primary"
           spinner-size="82px"
         />

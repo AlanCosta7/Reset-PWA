@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { LocalStorage } from 'quasar'
+import { Notify } from 'quasar'
 
 export function signInWithCpfAndPassword ({ commit, state }, payload) {
   // axios
@@ -33,6 +34,15 @@ export function signInWithCpfAndPassword ({ commit, state }, payload) {
         console.log('signInWithCpfAndPassword', response)
         return response.data
       }
+    }).catch( error => {
+      console.log(error)
+
+      Notify.create({
+        // only required parameter is the message:
+        message: 'Senha inválida ou usuário não existe',
+        timeout: 3000,
+        color: 'negative'
+      })
     })
 
 }
@@ -70,6 +80,16 @@ export function createUserWithCpfAndPassword ({ commit, state }, payload) {
       return response.data
 
     }
+  }).catch( error => {
+    console.log(error)
+    Notify.create({
+      // only required parameter is the message:
+      message: 'Usuário já existe',
+      timeout: 3000,
+      color: 'negative'
+    })
+
+    return error
   })
 
 }
@@ -102,6 +122,16 @@ export function saveProfile ({ commit, state }, payload) {
     console.log('saveProfile', response)
     return response
 
+  }).catch( error => {
+    console.log(error)
+
+    Notify.create({
+      // only required parameter is the message:
+      message: 'Erro ao tentar atualizar dados',
+      timeout: 3000,
+      color: 'negative'
+    })
+    return error
   })
 
 }

@@ -1,21 +1,20 @@
 <template>
-  <q-dialog v-model="dialogStudent" maximized persistent>
-    <q-card>
-      <q-card-section class="Column items-center q-gutter-md">
-        <div>
+  <q-dialog v-model="dialogStudent" :maximized="mobile" persistent>
+    <q-card style="max-width: 400px; width:100vw">
           <q-img
             :src="student.avatar"
             :ratio="16/9"
             spinner-color="primary"
             spinner-size="82px"
           />
-        </div>
+      <q-card-section class="Column items-center q-gutter-md">
+
         <div>Nome: {{student.name}}</div>
-        <div>Data de Nascimento: {{student.birth}}</div>
+        <div>Data de Nascimento: {{formatData(student.birth)}}</div>
         <div v-if="institution">Instituição: {{institution.name}}</div>
         <div>Interesses:</div>
-        <div v-for="(item, index) in student.skills" :key='index'>
-          <div>
+        <div v-for="(item, index) in student.skills" :key='index' class="row items-center">
+          <div class="col">
             {{item}}
           </div>
         </div>
@@ -34,6 +33,7 @@
 
 <script>
 import Vuex from "vuex";
+import { date } from 'quasar'
 
 export default {
   data() {
@@ -46,8 +46,9 @@ export default {
   },
   watch: {
     dialogStudent(val) {
-      if(val) {
-        this.$store.dispatch('getInstituicao', this.student.institution).then( result => {
+      var institution = this.student.institution
+      if(val && institution) {
+        this.$store.dispatch('getInstituicao', institution).then( result => {
             this.institution = result
            // console.log('getInstituicao', result.data)
 
@@ -62,6 +63,10 @@ export default {
       dialogStudent: "dialogStudent",
       err: "err",
     }),
+    mobile() {
+      var mobile = this.$q.platform.is.mobile;
+      return mobile;
+    },
   },
   mounted() {
 
@@ -69,6 +74,10 @@ export default {
   methods: {
     cancelar() {
       this.$store.commit('setDialogStudent', false)
+    },
+    formatData(item) {
+      let formattedString = date.formatDate(item, 'DD/MM/YYYY')
+      return formattedString
     },
     mentoriar() {
       var id = this.currentUser._id
