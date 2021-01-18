@@ -198,7 +198,7 @@ export function setMentoriar ({ commit, state }, payload) {
 
 export function getTrilha ({ commit, state }, payload) {
   // axios
-  var path = "https://reset-back-end.herokuapp.com/journey/6004b9c348f54e0004b1d8a3"
+  var path = `https://reset-back-end.herokuapp.com/journey/${payload}`
 
   return axios({
     method: 'GET',
@@ -207,7 +207,23 @@ export function getTrilha ({ commit, state }, payload) {
 
     if (response.status == "200") {
       commit('setTrilha', response.data)
-      console.log('setTrilha', response)
+      //console.log('setTrilha', response)
+    }
+  })
+}
+
+export function getAllJornada ({ commit, state }, payload) {
+  // axios
+  var path = "https://reset-back-end.herokuapp.com/journey"
+
+  return axios({
+    method: 'GET',
+    url: path,
+  }).then(function (response) {
+
+    if (response.status == "200") {
+      commit('setListaTrilha', response.data)
+      console.log('setListaTrilha', response)
     }
   })
 }

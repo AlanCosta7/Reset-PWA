@@ -1,33 +1,14 @@
 <template>
-  <q-page class="bg-grey-3" v-if="currentUser.type === 'student' && trilha">
+  <q-page class="bg-grey-3" v-if="currentUser.type === 'student' && listaTrilha">
     <div class="text-center text-h4 q-pa-md">Trilha</div>
-    <div class="q-pa-md">
-      <div class="text-h6">{{trilha.title}}</div>
-      <div class="text-bold">Habilidade: {{trilha.skill}}</div>
+
+    <div  class="row wrap justify-center q-gutter-md items-start content-start">
+       <q-card @click="selectItem(item)" style="width: 100px; height:100px" class="bg-positive flex flex-center" v-for="(item, i) in listaTrilha" :key="i">
+         <q-card-section>
+           <q-icon name="done" color="white" size="40px" />
+         </q-card-section>
+       </q-card>
     </div>
-    <q-carousel
-      class="absolute-bottom"
-      arrows
-      animated
-      v-model="slide"
-      height="70vh"
-    >
-      <q-carousel-slide
-        v-for="(item, index) in trilha.content"
-        :key="index"
-        :name="item._id"
-        :img-src="item.image">
-        <div class="absolute-full custom-caption">
-          <div class="text-h6">{{item.title}}</div>
-          <div class="text-subtitle1">{{item.description}}</div>
-        </div>
-
-        <div class="absolute-bottom">
-          <q-btn color="primary" class="full-width" label="Acessar conteúdo" @click="onClick(item.url)" />
-        </div>
-      </q-carousel-slide>
-
-    </q-carousel>
   </q-page>
 </template>
 
@@ -47,18 +28,28 @@ export default {
   computed: {
     ...Vuex.mapGetters({
       currentUser: "currentUser",
-      trilha: "trilha",
+      listaTrilha: "listaTrilha",
       err: "err",
     }),
   },
 
   mounted() {
-    this.$store.dispatch('getTrilha')
+    this.$store.dispatch('getAllJornada')
 
   },
   methods: {
     setStudent() {
       this.$store.commit('setDialogStudent', true)
+    },
+    selectItem(item) {
+      console.log(item)
+
+      var id = this.currentUser._id
+      this.$store.dispatch('getTrilha', item._id)
+      this.$router.push({
+          name: "trilha",
+          params: { id: id }
+        });
     },
     onClick(item) {
       openURL(item)

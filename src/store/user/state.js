@@ -40,6 +40,7 @@ export default function () {
     geoLocation: null,
     listStudent: [],
     dialogStudent: null,
-    trilha: null
+    trilha: null,
+    listaTrilha: null
   }
 }

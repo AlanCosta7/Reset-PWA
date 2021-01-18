@@ -14,6 +14,7 @@ const routes = [
       { path: 'profile', name: 'profile', component: () => import('pages/user/Profile.vue') },
       { path: 'institution', name: 'institution', component: () => import('pages/user/Institution.vue') },
       { path: 'journey', name:'journey', component: () => import('pages/user/Journey.vue') },
+      { path: 'trilha', name:'trilha', component: () => import('pages/user/Trilha.vue') },
       { path: '', name:'index', component: () => import('pages/Index.vue') }
     ]
   },

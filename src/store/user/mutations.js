@@ -33,3 +33,7 @@ export const setDialogStudent = (state, payload) => {
 export const setTrilha = (state, payload) => {
   state.trilha = payload
 };
+
+export const setListaTrilha = (state, payload) => {
+  state.listaTrilha = payload
+};
