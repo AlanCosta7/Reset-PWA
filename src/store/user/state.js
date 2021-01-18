@@ -41,6 +41,7 @@ export default function () {
     listStudent: [],
     dialogStudent: null,
     trilha: null,
-    listaTrilha: null
+    listaTrilha: null,
+    listMentoriados: null
   }
 }

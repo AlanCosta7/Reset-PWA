@@ -24,6 +24,29 @@
         </q-item>
       </q-list>
     </div>
+    <div style="max-width: 400px; width:100vw">
+      <div class="text-h6 q-pa-md">Meus mentoriados</div>
+      <q-list bordered v-for="(item, index) in listMentoriados" :key="index">
+        <q-item v-if="item" >
+          <q-item-section v-if="item.avatar" avatar>
+            <q-avatar size="40px" >
+              <img
+                v-if="item.avatar"
+                :src="item.avatar"
+                style="width:40px"
+              >
+            </q-avatar>
+          </q-item-section>
+          <q-item-section v-if="!item.avatar" avatar>
+            <q-avatar class="bg-primary text-white" size="40px" >
+              <div>{{item.name[0]}}</div>
+            </q-avatar>
+          </q-item-section>
+          <q-item-section>{{item.name}}</q-item-section>
+          <dialogStudent :student="item"></dialogStudent>
+        </q-item>
+      </q-list>
+    </div>
   </q-page>
 </template>
 
@@ -47,13 +70,18 @@ export default {
     ...Vuex.mapGetters({
       currentUser: "currentUser",
       listStudent: "listStudent",
+      listMentoriados: "listMentoriados",
       err: "err",
     }),
   },
 
   mounted() {
     this.$store.dispatch('getListStudent')
+    this.$store.dispatch('getListMentoriados')
+    setTimeout(() => {
+          console.log(this.listMentoriados)
 
+    }, 3000);
   },
   methods: {
     setStudent() {

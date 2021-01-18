@@ -31,7 +31,7 @@ export function signInWithCpfAndPassword ({ commit, state }, payload) {
       if (response.status == "200") {
         response.data.type = payload.path
         commit('setCurrentUser', response.data)
-        console.log('signInWithCpfAndPassword', response)
+      //  console.log('signInWithCpfAndPassword', response)
         return response.data
       }
     }).catch( error => {
@@ -73,10 +73,10 @@ export function createUserWithCpfAndPassword ({ commit, state }, payload) {
     }
   }).then(function (response) {
 
-    console.log('signInWithCpfAndPassword', response)
+  //  console.log('signInWithCpfAndPassword', response)
     if (response.status == "201") {
       commit('setCurrentUser', response.data)
-      console.log('signInWithCpfAndPassword', response)
+      //console.log('signInWithCpfAndPassword', response)
       return response.data
 
     }
@@ -120,6 +120,8 @@ export function saveProfile ({ commit, state }, payload) {
   }).then(function (response) {
 
     console.log('saveProfile', response)
+
+    commit('setCurrentUser', state.currentUser)
     return response
 
   }).catch( error => {
@@ -177,7 +179,7 @@ export function getListStudent ({ commit, state }, payload) {
 
     if (response.status == "200") {
       commit('setListStudent', response.data)
-      console.log('signInWithCpfAndPassword', response.data)
+    //  console.log('signInWithCpfAndPassword', response.data)
     }
   })
 }
@@ -203,6 +205,7 @@ export function setMentoriar ({ commit, state }, payload) {
   // axios
   var path = "https://reset-back-end.herokuapp.com/mentor/students"
   var token = state.currentUser.token
+  console.log('setMentoriar', token, payload)
 
   var data = {
     student: payload
@@ -211,17 +214,20 @@ export function setMentoriar ({ commit, state }, payload) {
   return axios({
     method: 'POST',
     url: path,
-    data: data,
     headers: {
       "Content-Type": "application/json",
       token: token
-    }
+    },
+    data: data,
   }).then(function (response) {
-
+    console.log('setMentoriar', response)
     if (response.status == "200") {
       return response.data
       //console.log('setInstituicao', response.data)
     }
+  }).catch(error => {
+    console.log('setMentoriar', error)
+
   })
 }
 
@@ -255,5 +261,29 @@ export function getAllJornada ({ commit, state }, payload) {
       commit('setListaTrilha', response.data)
       console.log('setListaTrilha', response)
     }
+  })
+}
+
+export function getListMentoriados ({ commit, state }, payload) {
+  // axios
+  var path = "https://reset-back-end.herokuapp.com/mentor/students"
+  var token = state.currentUser.token
+
+  return axios({
+    method: 'GET',
+    url: path,
+    headers: {
+      "Content-Type": "application/json",
+      token: token
+    }
+  }).then(function (response) {
+    console.log('getListMentoriados', response)
+    if (response.status == "200") {
+      commit('setlistMentoriados', response.data)
+      //console.log('signInWithCpfAndPassword', response.data)
+    }
+  }).catch(error => {
+    console.log('error', error)
+
   })
 }

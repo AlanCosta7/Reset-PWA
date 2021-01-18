@@ -12,4 +12,4 @@ export const institution = (state) => state.institution
 export const dialogStudent = (state) => state.dialogStudent
 export const trilha = (state) => state.trilha
 export const listaTrilha = (state) => state.listaTrilha
-
+export const listMentoriados = (state) => state.listMentoriados

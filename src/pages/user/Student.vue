@@ -80,8 +80,10 @@ export default {
       return formattedString
     },
     mentoriar() {
-      var id = this.currentUser._id
-      this.$store.dispatch('setMentoriar', id)
+      var id = this.student._id
+      this.$store.dispatch('setMentoriar', id).then( result => {
+        this.cancelar()
+      })
     }
   },
 }

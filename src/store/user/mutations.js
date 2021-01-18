@@ -37,3 +37,7 @@ export const setTrilha = (state, payload) => {
 export const setListaTrilha = (state, payload) => {
   state.listaTrilha = payload
 };
+
+export const setlistMentoriados = (state, payload) => {
+  state.listMentoriados = payload
+};
