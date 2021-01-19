@@ -81,7 +81,7 @@
           <q-select outlined v-model="currentUser.schooling" :options="optionsSchooling" label="Escolaridade" />
         </div>
         <div v-if="currentUser.type === 'student'" class="text-subtitle2">
-          <q-input outlined v-model="currentUser.institution" type="text" label="Instituição" />
+          <q-select outlined v-model="currentUser.institution" option-label="name" option-value="_id" :options="instituicaoAll" label="Institucional" />
         </div>
         <div v-if="currentUser.type === 'mentor'" class="text-subtitle2">
           <q-input outlined v-model="currentUser.profession" type="text" label="Profissão" />
@@ -115,12 +115,14 @@ export default {
   //   Maps
   // },
   mounted() {
-
+    this.$store.dispatch('getInstituicaoAll').then( result => {
+    })
   },
   computed: {
     ...Vuex.mapGetters({
       currentUser: "currentUser",
       getLetterUser: "getLetterUser",
+      instituicaoAll: "instituicaoAll",
       err: "err",
     }),
   },

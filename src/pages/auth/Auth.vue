@@ -345,7 +345,7 @@
 
 <script>
 import Vuex from "vuex";
-import { Loading } from "quasar";
+import { Loading, LocalStorage } from "quasar";
 
 export default {
   name: "PageLogin",
@@ -385,10 +385,16 @@ export default {
     }),
   },
   mounted() {
-    this.$store.dispatch("loadUser");
+
+    var user = LocalStorage.getItem('user')
+    if(this.currentUser) {
+      this.$store.dispatch("loadUser", this.currentUser)
+    } else if (user.token) {
+      this.$store.dispatch("loadUser", user);
+    }
+
     setTimeout(() => {
       if (this.currentUser) {
-        console.log(this.currentUser);
         const rediretDelay = 3000;
         this.redirectToApp(rediretDelay);
       }
@@ -436,10 +442,10 @@ export default {
     },
     redirectToApp(redirectDelay) {
       const currentUser = this.currentUser;
-      console.log("redirectToApp");
+      const token = currentUser.token
 
       Loading.show();
-      if (currentUser.type === 'mentor') {
+      if (token && currentUser.type === 'mentor') {
         setTimeout(() => {
           var id = this.currentUser._id;
           this.$router.push({
@@ -449,7 +455,7 @@ export default {
 
           Loading.hide();
         }, redirectDelay);
-      } else {
+      } else if( token && currentUser.type === 'student' ) {
         setTimeout(() => {
           var id = this.currentUser._id;
           this.$router.push({
@@ -459,6 +465,8 @@ export default {
 
           Loading.hide();
         }, redirectDelay);
+      } else {
+        return null
       }
     },
   },

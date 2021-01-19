@@ -1,12 +1,11 @@
-import { LocalStorage } from 'quasar'
 
 export const setCurrentUser = (state, payload) => {
   if (payload) {
     var currentUserModelo =   state.currentUserModelo
     let merged = {...currentUserModelo, ...payload};
-    LocalStorage.set('user', merged)
     state.currentUser = merged
-
+  } else {
+    state.currentUser = payload
   }
 };
 
@@ -40,4 +39,13 @@ export const setListaTrilha = (state, payload) => {
 
 export const setlistMentoriados = (state, payload) => {
   state.listMentoriados = payload
+};
+
+export const setInstituicaoAll = (state, payload) => {
+  state.instituicaoAll = payload
+};
+
+export const setStudent = (state, payload) => {
+  console.log('setStudent',payload)
+  state.selectStudent = payload
 };

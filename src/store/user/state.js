@@ -1,19 +1,19 @@
 export default function () {
   return {
     currentUser: null,
+    selectStudent: null,
     currentUserModelo: {
       cpf: '',
-      codedPassword: '',
       avatar: '',
       name: '',
       birth: '',
       institution: '',
       skills: [],
       profession: '',
-      tuto: '',
-      mentor: '',
       schooling: '',
       learningStyle: '',
+      token: '',
+      type: '',
       address: {
         street: '',
         number: '',
@@ -42,6 +42,7 @@ export default function () {
     dialogStudent: null,
     trilha: null,
     listaTrilha: null,
-    listMentoriados: null
+    listMentoriados: null,
+    instituicaoAll: []
   }
 }

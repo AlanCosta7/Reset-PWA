@@ -15,14 +15,15 @@
           Reset
         </q-toolbar-title>
         <q-btn color="grey-2" round @click="onProfile" >
-          <q-avatar size="40px">
-            <q-img
-              v-if="currentUser && currentUser.avatar"
-              :src="currentUser.photoUrl"
-              width="40px"
-              spinner-color="primary"
-              spinner-size="82px"
-            />
+          <q-avatar size="40px"  v-if="currentUser">
+            <div v-if="currentUser.avatar">
+              <q-img
+                :src="currentUser.avatar"
+                width="40px"
+                spinner-color="primary"
+                spinner-size="82px"
+              />
+            </div>
           <div class="text-black" v-if="!currentUser.avatar">
             {{ getLetterUser }}
           </div>
@@ -70,8 +71,11 @@ export default {
   mounted() {
 
     var user = LocalStorage.getItem('user')
-   // console.log(user)
-    this.$store.commit('setCurrentUser', user)
+    if(this.currentUser) {
+      this.$store.dispatch("loadUser", this.currentUser)
+    } else if (user.token) {
+      this.$store.dispatch("loadUser", user);
+    }
   },
   computed: {
     ...Vuex.mapGetters({
