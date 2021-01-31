@@ -7,73 +7,82 @@
         spinner-color="primary"
         spinner-size="82px"
       />
-      <div>
-        <q-btn color="amber" flat label="Seja um mentor" @click="onMentors" />
+      <div v-if="!mobile">
+        <q-btn color="amber" flat label="Seja um mentor" @click="onLogin" />
       </div>
       <q-space />
-      <div>
-        <q-btn color="white" flat label="Início" @click="onMentors" />
-        <q-btn color="white" flat label="Quem somos" @click="onMentors" />
-        <q-btn color="white" flat label="Como funciona" @click="onMentors" />
-        <q-btn color="white" flat label="Login" @click="onMentors" />
+      <div v-if="!mobile">
+        <q-btn color="white" flat label="Início" @click="onInicio" />
+        <q-btn color="white" flat label="Quem somos" @click="onSomos" />
+        <q-btn color="white" flat label="Como funciona" @click="onFunciona" />
+        <q-btn color="white" flat label="Login" @click="onLogin" />
       </div>
     </q-toolbar>
-    <section>
-      <div class="fit row wrap justify-around items-center content-center">
-        <div class="col">
-          <q-img
-            src="../../assets/menina.png"
-            width="70vw"
-            spinner-color="primary"
-            spinner-size="82px"
-          />
-        </div>
-        <div class="col-4 q-ma-md text-primary text-h4">
+    <section id="inicio">
+      <div class="fit row wrap justify-evenly items-center content-center">
+        <div v-if="mobile" class="col-lg-4 col-xs-12 col-md-4 col-sm-4 q-pa-md text-primary text-h6">
           <div>
           Venha fazer da tecnologia um mecanismo de inclusão para adolescente e jovens de lares de acolhimento!
           </div>
           <div class="q-my-md">
-            <q-btn color="primary" flat size="lg" label="Seja um mentor" @click="onClick" />
+            <q-btn color="primary" outline size="lg" label="Seja um mentor" @click="onLogin" />
+          </div>
+        </div>
+        <div class="col-lg col-xs-12 col-md col-sm fit row justify-center">
+          <q-img
+            src="../../assets/menina.png"
+            spinner-color="primary"
+            spinner-size="82px"
+          />
+        </div>
+        <div v-if="!mobile" class="col-lg-4 col-xs-12 col-md-4 col-sm-4 q-ma-md text-primary text-h4">
+          <div>
+          Venha fazer da tecnologia um mecanismo de inclusão para adolescente e jovens de lares de acolhimento!
+          </div>
+          <div class="q-my-md">
+            <q-btn color="primary" outline size="lg" label="Seja um mentor" @click="onLogin" />
           </div>
         </div>
       </div>
     </section>
-    <section class="bg-accent">
+    <section  id="somos" class="bg-accent q-pa-lg">
       <div class="fit row wrap justify-around items-center content-center">
-        <div class="col q-pa-md q-ma-md text-primary">
-          <h3 class="text-white text-bold">Quem Somos</h3>
-          <div class="text-white text-h6">
+        <div class="col-xs-12 col-lg q-pa-md q-ma-md text-primary">
+          <div v-if="!mobile" class="text-white text-h3 text-bold">Quem Somos</div>
+          <div v-if="mobile" class="text-white text-h4  text-bold">Quem Somos</div>
+          <div class="text-white q-my-xl text-h5">
             A Reset, é uma plataforma que projeta uma conexão entre adolescentes e jovens, de lares de acolhimento, a profissionais dispostos a mentorá-los no processo de aprendizagem, por meio de apadrinhamento profissional. Com isso, permitir o desenvolvimento pessoal e profissional de maneira adequada, dando perspectivas de um futuro melhor após suas saídas com a maioridade, das Casa Lares.          </div>
           <div class="q-my-md">
-            <q-btn color="white" flat size="lg" label="Seja um mentor" @click="onClick" />
+            <q-btn color="white" outline size="lg" label="Seja um mentor" @click="onLogin" />
           </div>
         </div>
-        <div class="col">
+        <div class="col-xs-12 col-lg-4">
           <q-img
             src="../../assets/quemsomos.svg"
-            width="40vw"
+            style="width: 100%; max-width: 400px"
             spinner-color="primary"
             spinner-size="82px"
           />
         </div>
       </div>
     </section>
-    <section class="q-pa-lg">
+    <section id="funciona" class="q-pa-lg">
       <div class="fit row wrap justify-around items-center content-center">
-        <div class="col q-pa-md q-ma-md">
-          <h3 class="text-primary text-bold">Como funciona</h3>
-          <div class="text-primary text-h6">
+        <div class="col q-pa-md ">
+          <div v-if="!mobile" class="text-primary text-h3 text-bold">Como funciona</div>
+          <div v-if="mobile"  class="text-primary text-h4 text-bold">Como funciona</div>
+          <div class="text-primary q-my-xl text-h5">
             Criamos uma trilha para ajudar você, mentor, a fazer a diferença na vida de que realmente precisa de ajuda.
           </div>
           <div class="q-my-md">
-            <q-btn color="white" flat size="lg" label="Seja um mentor" @click="onClick" />
+            <q-btn color="white" flat size="lg" label="Seja um mentor" @click="onLogin" />
           </div>
 
-        <div class="fit row wrap justify-around q-gutter-lg items-center content-center">
-          <div class="col column items-center">
+        <div class="fit row wrap justify-around items-center">
+          <div class="col-lg col-md col-sm col-xs-12 q-mx-md column items-center">
             <q-img
-            class="text-center"
               src="../../assets/cadastramento.svg"
+              :ratio="16/9"
               width="300px"
               spinner-color="primary"
               spinner-size="82px"
@@ -82,10 +91,11 @@
             <div class="text-center">
               A Reset faz o cadastramento dos adolescentes e jovens, de forma presencial, imputando seus dados e mapeando seu perfil de aprendizagem e interesses profissionais.
             </div>
-            </div>
-          <div class="col column items-center">
+          </div>
+          <div class="col-lg col-md col-sm col-xs-12 q-mx-md column items-center">
             <q-img
               src="../../assets/apadrinhamento.svg"
+              :ratio="16/9"
               width="300px"
               spinner-color="primary"
               spinner-size="82px"
@@ -94,9 +104,10 @@
             <div class="text-center">
               Você, profissional interessado em mentorar um desses jovens, faz seu cadastro e tem acesso as instituições e jovens num raio de 30 Km. Serão direcionados a você, aqueles que possuírem maior aderência as suas Skills e área profissional de atuação.            </div>
             </div>
-          <div class="col column items-center">
+          <div class="col-lg col-md col-sm col-xs-12 q-mx-md column items-center">
             <q-img
               src="../../assets/sucesso.svg"
+              :ratio="16/9"
               width="300px"
               spinner-color="primary"
               spinner-size="82px"
@@ -118,11 +129,44 @@
 </template>
 
 <script>
-export default {
 
+export default {
+  name: 'LandPage',
+  data () {
+    return {
+      leftDrawerOpen: false,
+    }
+  },
+  computed: {
+    mobile() {
+      if (this.$q.platform.is.mobile) {
+        return true
+      }
+      return false
+    }
+  },
+  methods: {
+    onInicio() {
+      var scrollDiv = document.getElementById("inicio").offsetTop;
+      window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+    },
+    onSomos() {
+      var scrollDiv = document.getElementById("somos").offsetTop;
+      window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+    },
+    onFunciona() {
+      var scrollDiv = document.getElementById("funciona").offsetTop;
+      window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+    },
+    onLogin() {
+      this.$router.push({ name: 'auth'})
+    }
+  }
 }
 </script>
 
 <style>
-
+  section{
+    scroll-behavior: smooth;
+  }
 </style>
