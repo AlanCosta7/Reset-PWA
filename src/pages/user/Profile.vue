@@ -9,7 +9,7 @@
             alt="Foto de perfil"
             @click="onPickPhoto"
           />
-          <div v-if="!currentUser.avatar">
+          <div v-if="!currentUser.avatar" @click="onPickPhoto">
             {{ getLetterUser }}
           </div>
           <input
@@ -164,8 +164,8 @@ export default {
         const fileReader = new FileReader();
         fileReader.addEventListener("load", () => {
           const base64 = fileReader.result;
-          this.currentUser.photoUrl = base64;
-          console.log("photoUrl", base64);
+          this.currentUser.avatar = base64;
+          //console.log("photoUrl", base64);
         });
         fileReader.readAsDataURL(file);
       } else {

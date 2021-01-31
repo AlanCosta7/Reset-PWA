@@ -4,7 +4,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', name:'auth', component: () => import('pages/auth/Auth.vue') }
+      { path: '', name:'auth', component: () => import('pages/auth/Auth.vue') },
+      { path: 'page', name:'landpage', component: () => import('pages/user/LandPage.vue') }
     ]
   },
   {
@@ -15,7 +16,7 @@ const routes = [
       { path: 'institution', name: 'institution', component: () => import('pages/user/Institution.vue') },
       { path: 'journey', name:'journey', component: () => import('pages/user/Journey.vue') },
       { path: 'trilha', name:'trilha', component: () => import('pages/user/Trilha.vue') },
-      { path: 'index', name:'index', component: () => import('pages/Index.vue') }
+      { path: 'index', name:'index', component: () => import('pages/Index.vue') },
     ]
   },
 
